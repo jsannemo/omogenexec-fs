@@ -29,5 +29,5 @@ mv $output_path/full/usr/{bin,include,lib,lib64,sbin,share} $output_path/fs/usr
 
 ./tests/run-test.sh $lang $output_path/fs/
 
-tar --zstd -cvf $base_path/output/omogen-$lang-fs.tar.zst $output_path/fs/*
+tar --zstd -cvf $base_path/output/omogen-$lang-fs.tar.zst -C $output_path/fs . 
 rm -rf $output_path
