@@ -1,3 +1,3 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
-RUN adduser omogentest --disabled-password --gecos ""
+RUN useradd omogentest --home /tmp

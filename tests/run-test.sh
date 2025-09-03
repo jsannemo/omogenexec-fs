@@ -14,7 +14,7 @@ mkdir -p $fs_path/dev
 sudo mount -t proc /proc $fs_path/proc/
 sudo mount --bind /dev $fs_path/dev/
 set +e
-sudo chroot $fs_path /bin/sh -c "chown -R omogentest /test; chmod u+x /test/run-test.sh; su omogentest -c 'bash /test/run-test.sh'"
+sudo chroot $fs_path /bin/sh -c "chown -R omogentest /test /tmp; chmod u+x /test/run-test.sh; su omogentest -c 'bash /test/run-test.sh'"
 ok=$?
 set -e
 
@@ -23,8 +23,8 @@ sudo umount -l $fs_path/dev
 rmdir $fs_path/proc
 rmdir $fs_path/dev
 
-rm -r $fs_path/test
-rm -r $fs_path/tmp
+sudo rm -rf $fs_path/test
+sudo rm -rf $fs_path/tmp
 
 if [ $ok -eq 0 ]
 then
@@ -32,3 +32,4 @@ then
 else
   echo "Test failed"
 fi
+exit $ok
